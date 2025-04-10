@@ -3,6 +3,7 @@ import { DarkModeToggle } from "./DarkModeToggle"
 import { BookMarkedIcon, BookOpen } from "lucide-react"
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 import { Button } from "./ui/button"
+import SearchInput from "./SearchInput"
 
 const Header = () => {
   return (
@@ -21,7 +22,7 @@ const Header = () => {
                   </span>
                </Link>
 
-            {/*search input*/}
+            <SearchInput/>
             </div>
 
             {/*RIGHT */}
