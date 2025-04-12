@@ -128,4 +128,15 @@ export const structure: StructureResolver = (S) =>
               ),
           ])
       ),
+
+      S.divider(),
+
+       // System Management
+       S.listItem()
+       .title("System Management")
+       .child(
+         S.list()
+           .title("System Management")
+           .items([S.documentTypeListItem("category").title("Categories")])
+       ),
     ])
