@@ -1,9 +1,12 @@
 import React from 'react'
 
-async function SearchPage (props)  {
-   const {searchParams} = await props
+async function SearchPage ({searchParams}: {
+   searchParams: Promise<{[key: string]: string | string[] | undefined}>   
+}) {
+   const term = await ((await searchParams).term)
+
    return (
-    <div>SearchPage</div>
+    <div>SearchPage {term}</div>
   )
 }
 
