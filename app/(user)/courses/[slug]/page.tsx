@@ -19,7 +19,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseBySlug(slug);
   const { userId } = await auth();
 
-  const isEnrolled = false
+  const isEnrolled = false;
     // userId && course?._id
     //   ? await isEnrolledInCourse(userId, course._id)
     //   : false;
