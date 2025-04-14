@@ -7,6 +7,7 @@ import getCourseBySlug from "@/sanity/lib/courses/getCourseBySlug";
 // import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
 import { auth } from "@clerk/nextjs/server";
 import EnrollButton from "@/components/EnrollButton";
+import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
 
 interface CoursePageProps {
   params: Promise<{
@@ -19,10 +20,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseBySlug(slug);
   const { userId } = await auth();
 
-  const isEnrolled = false;
-    // userId && course?._id
-    //   ? await isEnrolledInCourse(userId, course._id)
-    //   : false;
+  const isEnrolled = 
+    userId && course?._id
+      ? await isEnrolledInCourse(userId, course._id)
+      : false;
 
   if (!course) {
     return (

@@ -22,7 +22,7 @@ export async function isEnrolledInCourse(clerkId: string, courseId: string) {
       params: { studentId: studentId.data, courseId },
     });
 
-    return !!enrollment.data;
+    return !!enrollment.data; // !! means "convert to boolean"
   } catch (error) {
     console.error("Error checking enrollment status:", error);
     return false;
