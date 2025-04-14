@@ -4,9 +4,7 @@ import { Search } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
-async function SearchPage ({searchParams}: {
-   searchParams: Promise<{[key: string]: string | string[] | undefined}>   
-}) {
+async function SearchPage ({searchParams}: {searchParams: Promise<{[key: string]: string | string[] | undefined}>}) {
    const term = await ((await searchParams).term)
 
    if(!term || typeof term !== "string") {
