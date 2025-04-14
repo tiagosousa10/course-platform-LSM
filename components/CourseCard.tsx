@@ -83,13 +83,13 @@ const CourseCard = ({ course, progress, href }: CourseCardProps) => {
          </div>
       )}
        {typeof progress === "number" && (
-              <CourseProgress
-                progress={progress}
-                variant="default"
-                size="sm"
-                label="Course Progress"
-              />
-            )}
+         <CourseProgress
+            progress={progress}
+            variant="default"
+            size="sm"
+            label="Course Progress"
+         />
+         )}
        </div>
       </div>
     </div>
