@@ -4,6 +4,7 @@ import stripe from "@/lib/stripe"
 import baseUrl from "@/lib/baseUrl"
 import getCourseById from "@/sanity/lib/courses/getCourseById"
 import { clerkClient } from "@clerk/nextjs/server"
+import { createStudentIfNotExists } from "@/sanity/lib/student/createStudentIfNotExists"
 
 export async function createStripeCheckout(courseId: string, userId: string) {
    const course = await getCourseById(courseId)
@@ -27,4 +28,8 @@ export async function createStripeCheckout(courseId: string, userId: string) {
       lastName: lastName || "",
       imageUrl: imageUrl || "",
    })
+
+   if(!user) {
+      throw new Error("User not found")
+   }
 }
