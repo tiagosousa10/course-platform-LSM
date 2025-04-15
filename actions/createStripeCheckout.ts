@@ -6,9 +6,12 @@ import getCourseById from "@/sanity/lib/courses/getCourseById"
 import { clerkClient } from "@clerk/nextjs/server"
 import { createStudentIfNotExists } from "@/sanity/lib/student/createStudentIfNotExists"
 import { createEnrollment } from "@/sanity/lib/courses/createEnrollment"
+import { urlFor } from "@/sanity/lib/image"
 
 export async function createStripeCheckout(courseId: string, userId: string) {
-   const course = await getCourseById(courseId)
+
+   try {
+      const course = await getCourseById(courseId)
    const clerkUser = await (await clerkClient()).users.getUser(userId)
 
    const {emailAddresses, firstName, lastName, imageUrl} = clerkUser;
@@ -51,6 +54,51 @@ export async function createStripeCheckout(courseId: string, userId: string) {
          paymentId: "free",
          amount: 0,
       })
+
+      return {
+         url: `/courses/${course.slug?.current}`,
+      }
    }
+
+
+   const {title, description, image, slug} = course;
+
+   // create and configure Stripe checkout Session with course details
+   const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      success_url: `${baseUrl}/courses/${slug?.current}`,
+      cancel_url: `${baseUrl}/courses/${slug?.current}?canceled=true`,
+      metadata: {
+         courseId: course._id,
+         userId: userId,
+      },
+      line_items: [
+         {
+            quantity: 1,
+            price_data: {
+               currency: "usd",
+               product_data: {
+                  name: title,
+                  description,
+                  images: [urlFor(image).url() || ""],
+               },
+               unit_amount: priceInCents,
+            }
+         }
+      ]
+   })
+
+
+   return {
+      url: session.url
+   };
+
+
+   } catch(error) {
+      console.log("Error in createStripeCheckout", error);
+      throw new Error("Failed to create checkout session")
+   }
+
+   
 
 }
