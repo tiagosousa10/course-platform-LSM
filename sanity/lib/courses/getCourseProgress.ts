@@ -8,7 +8,7 @@ export async function getCourseProgress(clerkId: string, courseId: string) {
   // First get the student's Sanity ID
   const student = await getStudentByClerkId(clerkId);
 
-  if (!student?.data?._id) {
+  if (!student?._id) {
     throw new Error("Student not found");
   }
 
@@ -29,7 +29,7 @@ export async function getCourseProgress(clerkId: string, courseId: string) {
 
   const result = await sanityFetch({
     query: progressQuery,
-    params: { studentId: student.data._id, courseId },
+    params: { studentId: student._id, courseId },
   });
 
   const { completedLessons = [], course } = result.data;
