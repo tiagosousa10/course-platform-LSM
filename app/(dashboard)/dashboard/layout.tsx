@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
-import Header from "@/components/Header";
 import { SanityLive } from "@/sanity/lib/live";
+import { SidebarProvider } from "@/components/providers/SidebarProvider";
 
 
 export const metadata: Metadata = {
@@ -16,11 +16,12 @@ export default function DashboardLayout({
 }>) {
   return (
     <ClerkProvider>
-      <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-      </div>
-
+      <SidebarProvider>
+         <div className="h-full">
+            {children}
+         </div>
+      </SidebarProvider>
+      
       <SanityLive />
     </ClerkProvider>
   );
