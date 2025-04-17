@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import getCourseById from "@/sanity/lib/courses/getCourseById";
 import { Sidebar } from "@/components/Sidebar";
 import { getCourseProgress } from "@/sanity/lib/courses/getCourseProgress";
-import {checkCourseAccess} from "@/sanity/lib/courses/checkCourseAccess";
+import { checkCourseAccess } from "@/lib/auth";
 
 interface DashboardViewProps {
   children: React.ReactNode;
