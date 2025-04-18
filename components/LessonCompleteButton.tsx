@@ -5,6 +5,8 @@ import React, { useEffect, useState, useTransition } from 'react'
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { getLessonCompletionStatusAction } from '@/actions/getLessonCompletionStatusAction';
+import { completeLessonAction } from '@/actions/completeLessonAction';
+import { uncompleteLessonAction } from '@/actions/uncompleteLessonAction';
 
 interface LessonCompleteButtonProps {
    lessonId:string;
