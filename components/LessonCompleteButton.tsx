@@ -4,6 +4,7 @@ import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 import React, { useEffect, useState, useTransition } from 'react'
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
+import { getLessonCompletionStatusAction } from '@/actions/getLessonCompletionStatusAction';
 
 interface LessonCompleteButtonProps {
    lessonId:string;

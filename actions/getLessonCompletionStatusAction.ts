@@ -1,6 +1,9 @@
 "use server"
 
+import { getLessonCompletionStatus } from "@/sanity/lib/lessons/getLessonCompletionStatus";
+
 export async function getLessonCompletionStatusAction(lessonId: string, clerkId: string) {
+
    try {
       return await getLessonCompletionStatus(lessonId, clerkId)
 
@@ -8,4 +11,5 @@ export async function getLessonCompletionStatusAction(lessonId: string, clerkId:
       console.error("Error checking lesson completition status:", error);
       return false;
    }
+   
 }
