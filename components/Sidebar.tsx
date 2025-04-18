@@ -83,6 +83,7 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
             />
           </div>
         </div>
+
         <ScrollArea className="flex-1">
           <div className="p-2 lg:p-4">
             <Accordion
@@ -165,6 +166,7 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
                               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-8 bg-primary" />
                             )}
                           </Link>
+                          
                         );
                       })}
                     </div>
@@ -174,8 +176,11 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
             </Accordion>
           </div>
         </ScrollArea>
+
       </div>
     );
+
+
 
    return(
       <>

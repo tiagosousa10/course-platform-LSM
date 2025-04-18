@@ -1,8 +1,31 @@
+import getCourseById from '@/sanity/lib/courses/getCourseById';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
-const CoursePage = () => {
+interface CoursePageProps {
+  params: Promise<{courseId: string}>
+}
+
+const CoursePage = async ({params} : CoursePageProps) => {
+
+  const {courseId} = await params;
+  const course = await getCourseById(courseId)
+
+  if(!course) return redirect("/")
+
+  if(course.modules?.[0].lessons?.[0]?._id) {
+    return redirect(`/dashboard/courses/${courseId}/lessons/${course.modules?.[0].lessons?.[0]?._id}`)
+  }
+
   return (
-    <div>CoursePage</div>
+    <div className='h-full flex items-center justify-center'>
+      <div className='text-center'>
+        <h2 className='text-2xl font-bold'>Welcome to {course.title}</h2>
+        <p className='text-muted-foreground'>
+          This course has no content yet. Please check back later.
+        </p>
+      </div>
+    </div>
   )
 }
 
