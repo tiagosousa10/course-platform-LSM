@@ -1,7 +1,7 @@
 
 import { Search } from "lucide-react"
-import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+// import { useRouter } from "next/navigation"
+// import { FormEvent, useState } from "react"
 import Form from "next/form"
 
 const SearchInput = () => {
