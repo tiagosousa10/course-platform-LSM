@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { PortableText } from 'next-sanity'
 import { VideoPlayer } from '@/components/VideoPlayer'
 import { LoomEmbed } from '@/components/LoomEmbed'
+import LessonCompleteButton from '@/components/LessonCompleteButton'
 
 interface LessonPageProps {
   params: Promise<{
@@ -56,7 +57,7 @@ const LessonPage = async({params} : LessonPageProps) => {
             )}
 
             <div className='flex justify-end'>
-              {/* <LessonCompleteButton lessonId={lesson._id} clerkId={user!.id} /> */}
+              <LessonCompleteButton lessonId={lesson._id} clerkId={user!.id} />
 
             </div>
 
