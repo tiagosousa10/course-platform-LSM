@@ -26,16 +26,20 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
    const [openModules, setOpenModules] = useState<string[]>([])
 
    useEffect(() => {
-      if(pathname && course?.modules) {
-         const currentModuleId = course.modules.find(
-            (module) => module.lessons?.some((lesson) => pathname === `/dashboard/courses/${course._id}/lessons/${lesson._id}`)
-         )?._id;
-
-         if(currentModuleId && !openModules.includes(currentModuleId)) {
-            setOpenModules((prev) => [...prev, currentModuleId])
-         }
+    if (pathname && course?.modules) {
+      const currentModuleId = course.modules.find((module) =>
+        module.lessons?.some(
+          (lesson) =>
+            pathname === `/dashboard/courses/${course._id}/lessons/${lesson._id}`
+        )
+      )?._id;
+  
+      if (currentModuleId) {
+        setOpenModules([currentModuleId]); // define apenas uma vez
       }
-   }, [pathname, course, openModules])
+    }
+  }, [pathname, course]);
+  
 
 
 
@@ -70,6 +74,7 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
                 className="lg:hidden -mr-2"
                 size="icon"
               >
+                
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -83,7 +88,6 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
             />
           </div>
         </div>
-
         <ScrollArea className="flex-1">
           <div className="p-2 lg:p-4">
             <Accordion
@@ -116,6 +120,7 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
                       </div>
                     </div>
                   </AccordionTrigger>
+
                   <AccordionContent className="pt-2">
                     <div className="flex flex-col space-y-1">
                       {module.lessons?.map((lesson, lessonIndex) => {
@@ -166,7 +171,6 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
                               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-8 bg-primary" />
                             )}
                           </Link>
-                          
                         );
                       })}
                     </div>
@@ -176,11 +180,8 @@ export function Sidebar({course, completedLessons = []} : SidebarProps) {
             </Accordion>
           </div>
         </ScrollArea>
-
       </div>
     );
-
-
 
    return(
       <>

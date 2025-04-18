@@ -5,17 +5,17 @@ import { Sidebar } from "@/components/Sidebar";
 import { getCourseProgress } from "@/sanity/lib/courses/getCourseProgress";
 import { checkCourseAccess } from "@/lib/auth";
 
-interface DashboardViewProps {
+interface CourseLayoutProps {
   children: React.ReactNode;
   params: Promise<{
     courseId: string;
   }>;
 }
 
-export default async function DashboardView({
+export default async function CourseLayout({
   children,
   params,
-}: DashboardViewProps) {
+}: CourseLayoutProps) {
   const user = await currentUser();
   const { courseId } = await params;
 

@@ -3,6 +3,8 @@ import { getLessonById } from '@/sanity/lib/lessons/getLessonById'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { PortableText } from 'next-sanity'
+import { VideoPlayer } from '@/components/VideoPlayer'
+import { LoomEmbed } from '@/components/LoomEmbed'
 
 interface LessonPageProps {
   params: Promise<{
@@ -33,14 +35,14 @@ const LessonPage = async({params} : LessonPageProps) => {
 
           <div className='space-y-8'>
             {/* video section */}
-            {/* {lesson.videoUrl && (
+            {lesson.videoUrl && (
               <VideoPlayer url={lesson.videoUrl} />
-            )} */}
+            )}
 
             {/*loom embed video if loomurl is provided */}
-            {/* {lesson.loomUrl && (
-              <LoomEmbed url={lesson.loomUrl} />
-            )} */}
+            {lesson.loomUrl && (
+              <LoomEmbed shareUrl={lesson.loomUrl} />
+            )}
 
 
             {/* lesson content */}
