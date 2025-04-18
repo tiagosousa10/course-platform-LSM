@@ -1,7 +1,6 @@
 "use client"
 
 import { CheckCircle, Loader2, XCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState, useTransition } from 'react'
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
@@ -15,12 +14,13 @@ const LessonCompleteButton = ({lessonId, clerkId} : LessonCompleteButtonProps) =
    const [isPending,setIsPending] = useState(false)
    const [isCompleted, setIsCompleted] = useState<boolean | null>(null)
    const [isPendingTransition, startTransition] = useTransition()
-   const router = useRouter()
 
    useEffect(() => {
       startTransition(async () => {
          try {
             const status = await getLessonCompletionStatusAction(lessonId, clerkId)
+            setIsCompleted(status)
+
          } catch(error) {
             console.log("Error checking lesson completition status:", error);
             setIsCompleted(false)
@@ -28,6 +28,29 @@ const LessonCompleteButton = ({lessonId, clerkId} : LessonCompleteButtonProps) =
       })
 
    }, [lessonId, clerkId])
+
+   const handleToggle = async () => {
+      try {
+        setIsPending(false)
+        if(isCompleted) {
+          await uncompleteLessonAction(lessonId, clerkId)
+        } else {
+          await completeLessonAction(lessonId, clerkId)
+        }
+
+        startTransition(async () => {
+          const newStatus = await getLessonCompletionStatusAction(lessonId, clerkId)
+          setIsCompleted(newStatus)
+        })
+
+
+
+      } catch(error) {
+        console.error("Error toggling lesson completion:", error);
+      } finally {
+         setIsPending(false)
+      }
+   }
 
    const isLoading = isCompleted === null || isPendingTransition
 
