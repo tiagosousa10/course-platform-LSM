@@ -27,7 +27,6 @@ export default defineConfig({
     visionTool({defaultApiVersion: apiVersion}),
     presentationTool({
       previewUrl: {
-        origin: 'https://my-cool-site.com',
         previewMode: {
           enable: '/api/draft-mode/enable',
           disable: '/api/draft-mode/disable',
@@ -38,7 +37,7 @@ export default defineConfig({
   beta:{
     create: {
       startInCreateEnabled:true,
-      fallbackStudioOrigin:"course-platform-lsm.sanity.studio"
+      fallbackStudioOrigin:"course-platform-lsm.sanity.stu"
     }
   }
 })
