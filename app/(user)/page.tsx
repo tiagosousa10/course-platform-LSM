@@ -1,13 +1,19 @@
 import CourseCard from "@/components/CourseCard";
 import Hero from "@/components/Hero";
 import { getCourses } from "@/sanity/lib/courses/getCourses";
+import Loading from "./loading";
+
+export const dynamic = "force-static";
+export const revalidate = 3600; // revalidate at most every hour
 
 export default async function Home() {
-  const courses = await getCourses()
-  
+  const courses = await getCourses();
+
   return (
-    <div className="min-h-screen bg-background ">
+    <div className="min-h-screen bg-background">
+      {/* <Loading/> */}
       <Hero />
+
       {/* Courses Grid */}
       <div className="container mx-auto px-4">
         <div className="flex items-center gap-4 py-8">
@@ -28,7 +34,6 @@ export default async function Home() {
           ))}
         </div>
       </div>
-      
     </div>
   );
 }

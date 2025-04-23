@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { DarkModeToggle } from "./DarkModeToggle"
 import { BookMarkedIcon, BookOpen } from "lucide-react"
